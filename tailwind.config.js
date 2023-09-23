@@ -6,6 +6,10 @@ export default {
       fontFamily: {
         'cenotaph': ['Cenotaph Titling', 'serif'],
       },
+      screens: {
+        'xs': '400px',
+        'xxs': '0px',
+      },
     },
   },
   plugins: [require("daisyui")],
