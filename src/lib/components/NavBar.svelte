@@ -1,33 +1,51 @@
 <script lang="ts">
+    import MenuRounded from '$lib/icons/MenuRounded.svelte';
+    import Translate from '$lib/icons/Translate.svelte';
+    import Settings from '$lib/icons/Settings.svelte';
+    import { onMount } from 'svelte';
+    import { themeChange } from 'theme-change';
 
+    onMount(() => {
+        themeChange(false);
+    });
 </script>
 
 
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-100 drop-shadow-lg">
     <div class="navbar-start">
-      <div class="dropdown">
+        <div class="dropdown">
         <label tabindex="0" class="btn btn-ghost lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            <MenuRounded height=2em width=2em/>
         </label>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+            <ul tabindex="0" class="menu dropdown-content z-[1] shadow bg-base-100">
                 <li><a>Home</a></li>
                 <li><a>Projects</a></li>
                 <li><a>About</a></li>
                 <li><a>Contact</a></li>
             </ul>
         </div>
-        <a class="btn btn-ghost normal-case text-xl lg:hidden font-cenotaph">&lt;Hanayou /&gt;</a>
+    </div>
+    <div class="navbar-center lg:hidden">
+        <div class="menu menu-horizontal">
+            <a class="my-auto text-3xl font-cenotaph" href="/">&lt;Hanayou /&gt;</a>
+        </div>
     </div>
     <div class="navbar-center hidden lg:flex ">
-        <ul class="menu menu-horizontal px-1">
-            <li><a class="my-auto text-xl" href="/">Home</a></li>
-            <li><a class="my-auto text-xl" href="/projects">Projects</a></li>
-            <a class="my-auto px-10 text-3xl font-cenotaph" href="/">&lt;Hanayou /&gt;</a>
-            <li><a class="my-auto text-xl" href="/about">About</a></li>
-            <li><a class="my-auto text-xl" href="/contact">Contact</a></li>
+        <ul class="menu menu-horizontal">
+            <li><a class="text-xl py-0" href="/">Home</a></li>
+            <li><a class="my-auto text-xl py-0" href="/projects">Projects</a></li>
+            <a class="px-10 text-3xl font-cenotaph align-middle" href="/">&lt;Hanayou /&gt;</a>
+            <li><a class="my-auto text-xl py-0" href="/about">About</a></li>
+            <li><a class="my-auto text-xl py-0" href="/contact">Contact</a></li>
         </ul>
     </div>
     <div class="navbar-end">
-        <a class="btn">Button</a>
+        <button class="btn btn-sm btn-circle btn-outline">
+            <Translate />
+        </button>
+        <button class="btn btn-sm btn-circle btn-outline" data-toggle-theme="dark,light" data-act-class="ACTIVECLASS">
+            <Settings />
+        </button>
     </div>
 </div>
+

@@ -4,7 +4,9 @@
 </script>
 
 {#key $page.url}
-    <div transition:fly={{x: -100, duration: 250}}>
+    <div 
+        in:fly={{x: -100, duration: 125, delay: 125}}
+        out:fly={{x: -100, duration: 125}}>
         <slot />
     </div>
 {/key}
