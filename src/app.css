@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Cenotaph";
+        src: url("../static/fonts/Cenotaph-Titling.otf");
+    }
+}
