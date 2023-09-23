@@ -19,15 +19,13 @@
 
 <div class="navbar fixed bg-base-100 drop-shadow-lg" bind:clientHeight={height}>
     <div class="navbar-start">
-        <div class="dropdown w-100">
-        <label tabindex="0" class="btn btn-ghost lg:hidden">
-            <MenuRounded height=2em width=2em/>
-        </label>
-            <ul tabindex="0" class="menu dropdown-content z-[1] shadow bg-base-100">
-                <li><a class="my-auto text-xl">Home</a></li>
-                <li><a class="my-auto text-xl">Projects</a></li>
-                <li><a class="my-auto text-xl">About</a></li>
-                <li><a class="my-auto text-xl">Contact</a></li>
+        <div class="dropdown dropdown-start lg:hidden">
+            <label tabindex="0" class="btn btn-sm rounded-full outline outline-0"><MenuRounded /></label>
+            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </div>
     </div>
@@ -49,10 +47,10 @@
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-sm rounded-full outline outline-0"><FlagUK class="rounded-full"/><Translate /></label>
             <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-              <li><a><FlagUK class="rounded-full"/>English</a></li>
-              <li><a><FlagJP class="rounded-full"/>日本語</a></li>
+                <li><a><FlagUK class="rounded-full"/>English</a></li>
+                <li><a><FlagJP class="rounded-full"/>日本語</a></li>
             </ul>
-          </div>
+        </div>
         <button class="btn btn-sm btn-circle btn-outline flex" data-toggle-theme="dark,light" data-act-class="ACTIVECLASS" on:click={() => { darkMode.set(!$darkMode); }}>
             {#key $darkMode}
                 {#if $darkMode}
