@@ -7,4 +7,7 @@
         font-family: "Cenotaph";
         src: url("../static/fonts/Cenotaph-Titling.otf");
     }
+    html {
+        @apply duration-200;
+    }
 }
