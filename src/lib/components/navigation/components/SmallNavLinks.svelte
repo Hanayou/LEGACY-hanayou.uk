@@ -15,8 +15,8 @@
 </div>
 <div class="navbar-center lg:hidden">
     <div class="menu menu-horizontal">
-        <a class="my-auto text-3xl font-cenotaph sm:text-xl xxs:text-sm  bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500" 
+        <a class="my-auto text-xl font-cenotaph bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500" 
         href="/">
-        <strong>&lt;</strong>Hanayou /<strong>&gt;</strong></a>
+        <strong>&lt;Hanayou&gt;</strong></a>
     </div>
 </div>

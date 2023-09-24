@@ -10,6 +10,10 @@
     html {
         @apply duration-200;
     }
+    body::-webkit-scrollbar {
+        display:none;
+    }
+
     .activePage {
         @apply shadow-inner bg-base-300;
     }

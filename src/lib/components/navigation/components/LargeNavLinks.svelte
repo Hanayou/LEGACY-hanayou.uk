@@ -21,7 +21,7 @@
             </a>
         </li>
         <a 
-            class="px-10 m-auto text-3xl font-cenotaph bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500"
+            class="px-10 m-auto text-xl font-cenotaph bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-yellow-500"
             href="/">
             <strong>&lt;Hanayou&gt;</strong>
         </a>

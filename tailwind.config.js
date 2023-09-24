@@ -12,6 +12,20 @@ export default {
       },
     },
   },
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["[data-theme=light]"],
+          primary: "rgb(249, 115, 22)",
+        },
+        dark: {
+          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
+          primary: "rgb(249, 115, 22)",
+        }
+      }
+    ]
+  },
   plugins: [require("daisyui")],
 }
 

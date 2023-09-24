@@ -5,7 +5,8 @@
 
 {#key $page.url}
     <div 
-        in:fade={{duration: 0, delay: 0}}>
+        in:fade={{duration: 200, delay: 0}}
+        class="pt-[64px]">
         <slot />
     </div>
 {/key}
