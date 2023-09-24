@@ -5,7 +5,7 @@
 </script>
 
 <!-- Navigation Bar -->
-<div class="navbar fixed bg-base-100 drop-shadow-lg z-50">
+<div class="navbar fixed p-0 h-16 bg-base-100 drop-shadow-lg z-50">
     <SmallNavLinks /> <!-- When below lg media query size -->
     <LargeNavLinks />
     <Settings />

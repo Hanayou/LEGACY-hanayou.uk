@@ -10,4 +10,7 @@
     html {
         @apply duration-200;
     }
+    .activePage {
+        @apply shadow-inner bg-base-300;
+    }
 }
