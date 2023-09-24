@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { fly } from "svelte/transition";
     import { page } from "$app/stores";
+    import { fade } from "svelte/transition";
 </script>
 
 {#key $page.url}
     <div 
-        in:fly={{x: -100, duration: 125, delay: 125}}
-        out:fly={{x: -100, duration: 125}}>
+        in:fade={{duration: 0, delay: 0}}>
         <slot />
     </div>
 {/key}
