@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from '$app/stores';
-    import { invalidateAll } from '$app/navigation';
 
     // Stores
     import { language } from '$lib/stores/languageStore';
@@ -16,9 +15,7 @@
             console.log(`Language already set to en`);
             return; // early return if already active language is selected
         }
-
         language.setLang(lang);
-        invalidateAll(); // Called to ensure that all text UI elements are reloaded
         console.log(`Language set to: ${$language}`);
     };
 </script>

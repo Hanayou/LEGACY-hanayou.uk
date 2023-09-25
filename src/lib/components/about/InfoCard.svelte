@@ -10,7 +10,7 @@
     // Langauge Props
     import { language } from '$lib/stores/languageStore';
     import { lang } from '$lib/translations/components/about/InfoCard';
-    let langData = $language === 'en' ? lang.en : lang.jp;
+    $: langData = $language === 'en' ? lang.en : lang.jp;
 </script>
 
 <div

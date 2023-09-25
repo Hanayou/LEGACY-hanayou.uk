@@ -5,7 +5,7 @@
     // Langauge Props
     import { language } from '$lib/stores/languageStore';
     import { lang } from '$lib/translations/components/about/WorkEducation';
-    let langData = $language === 'en' ? lang.en : lang.jp;
+    $: langData = $language === 'en' ? lang.en : lang.jp;
 </script>
 
 <div class="divider max-w-4xl mx-auto my-10">{langData.divider}</div>

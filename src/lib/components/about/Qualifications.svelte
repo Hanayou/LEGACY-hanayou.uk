@@ -13,7 +13,7 @@
     // Langauge Props
     import { language } from '$lib/stores/languageStore';
     import { lang } from '$lib/translations/components/about/Qualifications';
-    let langData = $language === 'en' ? lang.en : lang.jp;
+    $: langData = $language === 'en' ? lang.en : lang.jp;
 </script>
 
 <!--  QUALIFICATIONS Divider -->
