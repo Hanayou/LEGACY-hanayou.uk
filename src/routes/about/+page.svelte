@@ -4,15 +4,13 @@
     // Components
     import InfoCard from '$lib/components/about/InfoCard.svelte';
     import WorkEducation from '$lib/components/about/WorkEducation.svelte';
+    import Qualifications from '$lib/components/about/Qualifications.svelte';
+    import Skills from '$lib/components/about/Skills.svelte';
 
     export let data: PageData;
 </script>
-<!-- About Info Card -->
+
 <InfoCard langData={data.language.card}/>
-<!--  Work/Education Experience Divider -->
 <WorkEducation langData={data.language.workEducation}/>
-
-<!--  SKILLS Divider -->
-<div class="divider max-w-4xl mx-auto my-10">SKILLS</div>
-
-
+<Qualifications />
+<Skills />

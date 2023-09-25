@@ -8,6 +8,7 @@
     import LinkedIn from '$lib/icons/LinkedIn.svelte';
     import { stringify } from 'postcss';
 
+    // Langauge Props
     export let langData = {
         greeting: '',
         description: '',
@@ -17,7 +18,7 @@
 
 <div
     in:fly={{ delay: 0, duration: 500, y: 200}}
-    class="grid place-items-center w-screen px-5 ">
+    class="grid place-items-center w-screen px-5">
     <div class="mockup-window shadow-xl bg-base-300 m-10 w-full max-w-4xl">
         <div
             in:fade={{ delay:250, duration: 500}}
@@ -30,7 +31,7 @@
             <div class="flex flex-col p-10 order-2">
                 <div class="avatar justify-center">
                     <div class="w-48 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2">
-                        <img src="images/ProfilePhoto.png" />
+                        <img src="images/ProfilePhoto.png" alt="Picture of me - Sam"/>
                     </div>
                 </div>
                 <div class="flex flex-row my-5 justify-center">
@@ -42,7 +43,7 @@
                 <h1 class="text-4xl text-center md:text-left">{langData.greeting}</h1>
                 <p class="text-justify md:text-left">{langData.description}</p>
                 <div class="flex justify-center md:justify-start">
-                    <a href="/projects"><button class="btn btn-primary line w-36">{langData.button}</button></a>
+                    <a href="/projects"><button class="btn btn-primary text-white w-36">{langData.button}</button></a>
                 </div>
             </div>
         </div>
