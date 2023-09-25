@@ -6,21 +6,30 @@ language.subscribe((value) => {
     lang = value;
 });
 
-interface Languages {
-    en: string;
-    jp: string;
+const en = {
+    headline: 'Welcome to SvelteKit!',
+    content: 'Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.',
+    buttonTxt: 'GET STARTED',
+    objText: {
+        objA: 'test1',
+        objB: 'test2'
+    }
 }
 
-const greetings: Languages = {
-    en: 'Welcome to SvelteKit!',
-    jp: 'SvelteKitへようこそ！',
-};
+const jp = {
+    headline: 'SvelteKitへようこそ！',
+    content: 'Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.',
+    buttonTxt: '未来へ一歩',
+    objText: {
+        objA: 'test1',
+        objB: 'test2'
+    }
+}
 
 export const load = (async () => {
-    console.log(`Load function language: ${lang}`);
     return {
         // @ts-ignore
-        // Ignored as TS does not allow returning Writable<String> 
-        greeting: greetings[lang ?? 'en']
+        // Ignored as TS throws string indexing error
+        language: lang == 'en' ? en : jp
     };
 }) satisfies PageLoad;
