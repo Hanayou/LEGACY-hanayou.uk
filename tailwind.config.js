@@ -21,7 +21,7 @@ export default {
         },
         dark: {
           ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
-          primary: "rgb(249, 115, 22)",
+          primary: "rgb(249, 115, 22)"
         }
       }
     ]
