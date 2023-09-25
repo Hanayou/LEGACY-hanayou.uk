@@ -1,7 +1,14 @@
-<div class="divider max-w-4xl mx-auto my-10">SKILLS</div>
+<script lang="ts">
+        // Langauge Props
+        import { language } from '$lib/stores/languageStore';
+        import { lang } from '$lib/translations/components/about/Skills';
+        let langData = $language === 'en' ? lang.en : lang.jp;
+</script>
+
+<div class="divider max-w-4xl mx-auto my-10">{langData.divider}</div>
 <div class="grid place-items-center w-screen px-5">
     <div class="flex flex-col items-center m-10 rounded-lg w-full max-w-4xl gap-5">
-        <strong>Programming Languages</strong>
+        <strong>{langData.programmingLanguages}</strong>
         <div class="flex flex-row flex-wrap gap-2 justify-center">
             <a href="/projects?tag=HTML5"><button class="btn rounded-full">HTML5</button></a>
             <a href="/projects?tag=CSS3"><button class="btn rounded-full">CSS3</button></a>
@@ -13,7 +20,7 @@
             <a href="/projects?tag=C#"><button class="btn rounded-full">C#</button></a>
         </div>
         <div class="h-6"/>
-        <strong>Frameworks・Libraries</strong>
+        <strong>{langData.frameworksLibraries}</strong>
         <div class="flex flex-row flex-wrap gap-2 justify-center">
             <a href="/projects?tag=Svelte"><button class="btn rounded-full">Svelte</button></a>
             <a href="/projects?tag=HTML5"><button class="btn rounded-full">SvelteKit</button></a>
@@ -22,7 +29,7 @@
             <a href="/projects?tag=Flutter"><button class="btn rounded-full">Flutter</button></a>
         </div>
         <div class="h-6"/>
-        <strong>Platforms・Tools</strong>
+        <strong>{langData.platformsTool}</strong>
         <div class="flex flex-row flex-wrap gap-2 justify-center">
             <a href="/projects?tag=GCP"><button class="btn rounded-full">Google Cloud Platform</button></a>
             <a href="/projects?tag=GitHub"><button class="btn rounded-full">GitHub</button></a>
