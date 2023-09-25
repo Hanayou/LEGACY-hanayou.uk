@@ -40,7 +40,7 @@
                 <h1 class="text-4xl text-center md:text-left">{langData.greeting}</h1>
                 <p class="text-justify md:text-left">{langData.description}</p>
                 <div class="flex justify-center md:justify-start">
-                    <a href="/projects"><button class="btn btn-primary text-white w-36">{langData.button}</button></a>
+                    <a href="/projects"><button class="btn btn-primary text-white w-auto">{langData.button}</button></a>
                 </div>
             </div>
         </div>
