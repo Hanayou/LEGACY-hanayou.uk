@@ -33,6 +33,7 @@
                         submitting = false;
                         if (result.type === "success") {
                             success = true;
+                            msg = ""; // reset msg length
                             setTimeout(() => {
                                 success = false;
                             }, 3000); // Shows success alert for 3 seconds
