@@ -4,7 +4,7 @@
     export let langData = '';
 </script>
 
-<div class="divider max-w-4xl mx-auto my-10">{langData}</div>
+<div class="divider max-w-4xl mx-auto my-10">WORK・EDUCATION</div>
 <div class="grid place-items-center w-screen px-5 ">
     <div class="flex flex-col m-10 rounded-lg  w-full max-w-4xl gap-2">
         <div class="collapse collapse-arrow border border-base-300 bg-base-200">

@@ -23,7 +23,7 @@
             </div>
             <div class="align-center w-full p-1.5 pl-5">
                 <h2 class="text-2xl">JLPT N2</h2>
-                <p class="my-2">Independently studied for and passed the JLPT N2 in December 2018, with plans to take the JLPT N1 in the near future.</p>
+                <p class="my-2">Independently studied for and passed the JLPT N2 (Japanese Langauge Proficiency Test) in December 2018, with plans to take the JLPT N1 in the near future.</p>
             </div>
             
         </div>

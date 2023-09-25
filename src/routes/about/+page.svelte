@@ -10,7 +10,7 @@
     export let data: PageData;
 </script>
 
-<InfoCard langData={data.language.card}/>
-<WorkEducation langData={data.language.workEducation}/>
+<InfoCard />
+<WorkEducation />
 <Qualifications />
 <Skills />

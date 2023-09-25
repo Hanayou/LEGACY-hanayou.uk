@@ -12,12 +12,12 @@
 
     // Sets the language in the store when a new language is selected
     let setLanguage = function(lang: string): any {
-        console.log(`Language ${lang} was clicked!`)
         if ($language === lang) {
             console.log(`Language already set to en`);
             return; // early return if already active language is selected
         }
-        language.set(lang);
+
+        language.setLang(lang);
         invalidateAll(); // Called to ensure that all text UI elements are reloaded
         console.log(`Language set to: ${$language}`);
     };

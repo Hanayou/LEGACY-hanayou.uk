@@ -6,14 +6,11 @@
     import GitHub from '$lib/icons/GitHub.svelte';
     import YouTube from '$lib/icons/YouTube.svelte';
     import LinkedIn from '$lib/icons/LinkedIn.svelte';
-    import { stringify } from 'postcss';
 
     // Langauge Props
-    export let langData = {
-        greeting: '',
-        description: '',
-        button: ''
-    };
+    import { language } from '$lib/stores/languageStore';
+    import { lang } from '$lib/translations/components/about/InfoCard';
+    let langData = $language === 'en' ? lang.en : lang.jp;
 </script>
 
 <div
