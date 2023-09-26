@@ -40,7 +40,7 @@
     </button>
     <dialog id={modalId} class="modal">
         <div class="flex flex-col modal-box max-w-4xl max-h-4xl">
-            <div class="flex flew-row">
+            <div class="flex flew-row justify-between">
                 <div>
                     <h3 class="font-bold text-xl">Project Title</h3>
                     <p class="text-sm py-4">2018-2023</p>
@@ -55,8 +55,8 @@
                     </div>
                     <div class="divider"/>
                 </div>
-                <form method="dialog" class="">
-                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                <form method="dialog">
+                    <button class="btn btn-sm btn-circle btn-ghost">✕</button>
                 <form>
             </div>
             <div class="no-scrollbar overflow-y-scroll h-full scroll-shadows">
@@ -64,7 +64,6 @@
                     TEST TEST TESTT TEST TEST TT TEST TEST TEST TE
                 </p>
             </div>
-            
         </div>
         <form method="dialog" class="modal-backdrop">
             <button class="cursor-default">close</button>
