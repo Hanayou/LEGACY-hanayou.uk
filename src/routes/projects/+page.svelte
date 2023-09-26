@@ -1,8 +1,17 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
+  import { page } from '$app/stores';
   import Project from '$lib/components/projects/Project.svelte';
 
   import Search from '$lib/icons/Search.svelte';
+  import { onMount } from 'svelte';
+
+  let tags: string[];
+
+  onMount(() => {
+    tags = $page.url.searchParams.getAll('tag');
+    console.log(tags);
+  });
 
   let tests = [0,1,2,3,4,5];
 </script>
@@ -13,6 +22,7 @@
       <input 
         type="text"
         placeholder="Search..."
+        bind:value={tags}
         class="input input-ghost focus:outline-none bg-transparent w-full"/>
       <button class="btn bg-transparent hover:bg-transparent border-none hover:scale-110 duration-100">
         <Search width="1.5em" height="1.5em"/>
