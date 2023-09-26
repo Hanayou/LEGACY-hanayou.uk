@@ -19,7 +19,7 @@
       </button>
     </div>
   </form>
-  <div class="divider w-full px-5" />
+  <div class="divider w-full px-5">7 Results</div>
   <div class="flex flex-col gap-3">
     {#each tests as test, index}
       <Project index={index}/>
