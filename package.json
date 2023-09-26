@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sendgrid/mail": "^7.7.0",
 		"firebase": "^10.4.0",
 		"firebase-admin": "^11.10.1",
 		"sanitize-html": "^2.11.0",

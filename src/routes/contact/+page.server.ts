@@ -1,5 +1,11 @@
+// For contact form input data validation and sanitization
 import { fail } from '@sveltejs/kit';
 import sanitize from 'sanitize-html';
+
+// Sending emails via SMTP
+import sgMail from '@sendgrid/mail';
+import { SENDGRID_API_KEY, SENDGRID_EMAIL } from '$env/static/private';
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 export const actions = {
     submit: async ({ cookies, request }) => {
@@ -8,11 +14,12 @@ export const actions = {
         let name = sanitize(data.get('name') as string);
         let email = sanitize(data.get('email') as string);
         let message = sanitize(data.get('message') as string);    
+        message = message.replaceAll("\r\n", "<br/>") // replace so email renders newlines properly
 
         console.log({name, email, message});
 
         try {
-            // Validate
+            // Validate input data (none empty or too long)
             if (!name) { throw new Error('Name cannot be empty'); }
             if (!email) { throw new Error('Email cannot be empty'); }
             if (!message) { throw new Error('Message cannot be empty'); }
@@ -27,18 +34,56 @@ export const actions = {
                 error: error.message
             });
         }
+        
+        
 
-        return {
-            name: name,
-            email: email,
-            message: message
+        const userDetailsMsg = `Name: ${name}<br/>Email: ${email}<br/>Message:<br/>${message}`;
+        // Send Email to contacts mailbox + user for confirmation using SendGrid SMTP API
+        const msg = {
+            to: SENDGRID_EMAIL,
+            from: SENDGRID_EMAIL,
+            subject: `Hanayou.uk - Contact Form (${name})`,
+            text: userDetailsMsg,
+            html: userDetailsMsg
         };
+        (async () => {
+            try {
+                await sgMail.send(msg);
+            } catch (error: any) { 
+                console.error(error);
+            }
+        })();
 
+        // Append message prefix as automated response
+        const autoMsg = "Thank you for your email, I aim to reply as quickly as possible.<br/>All the best - Sam (Hanayou)."
 
-
-        // Sanitise?
-
-
-        // Send to mail API
+        // Send Email to contacts mailbox + user for confirmation using SendGrid SMTP API
+        const userMsg = {
+            to: email,
+            from: SENDGRID_EMAIL,
+            subject: 'Hanayou.uk - Contact Form',
+            text: autoMsg,
+            html: autoMsg
+        };
+        (async () => {
+            try {
+                await sgMail.send(userMsg);
+                // Successful return
+                return {
+                    name: name,
+                    email: email,
+                    message: message
+                };
+            } catch (error: any) { 
+                // Mail server error
+                console.error(error);
+                return {
+                    name: name,
+                    email: email,
+                    message: message,
+                    error: error.message
+                };
+            }
+        })();
     }
 };
