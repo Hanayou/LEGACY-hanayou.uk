@@ -46,13 +46,12 @@ export const actions = {
             text: userDetailsMsg,
             html: userDetailsMsg
         };
-        (async () => {
-            try {
-                await sgMail.send(msg);
-            } catch (error: any) { 
-                console.error(error);
-            }
-        })();
+
+        try {
+            await sgMail.send(msg);
+        } catch (error: any) { 
+            console.error(error);
+        }
 
         // Append message prefix as automated response
         const autoMsg = "Thank you for your email, I aim to reply as quickly as possible.<br/>All the best - Sam (Hanayou)."
@@ -65,25 +64,24 @@ export const actions = {
             text: autoMsg,
             html: autoMsg
         };
-        (async () => {
-            try {
-                await sgMail.send(userMsg);
-                // Successful return
-                return {
-                    name: name,
-                    email: email,
-                    message: message
-                };
-            } catch (error: any) { 
-                // Mail server error
-                console.error(error);
-                return {
-                    name: name,
-                    email: email,
-                    message: message,
-                    error: error.message
-                };
-            }
-        })();
+        
+        try {
+            await sgMail.send(userMsg);
+            // Successful return
+            return {
+                name: name,
+                email: email,
+                message: message
+            };
+        } catch (error: any) { 
+            // Mail server error
+            console.error(error);
+            return {
+                name: name,
+                email: email,
+                message: message,
+                error: error.message
+            };
+        }
     }
 };

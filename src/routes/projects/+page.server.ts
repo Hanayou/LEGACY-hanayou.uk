@@ -33,8 +33,7 @@ export const actions = {
         console.log(data);
         
         try {
-            let test: string;
-            test = await getAllProjects()
+            let test = await getAllProjects();
             return {
                 test: test
             }
