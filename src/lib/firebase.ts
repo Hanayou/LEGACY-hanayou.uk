@@ -2,9 +2,10 @@
 // Config information is not sensitive and can be kept in version control
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
+import { writable } from "svelte/store";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCZEXytEPyNvpksx6Gauaivl7aO52ngHZk",
@@ -21,3 +22,25 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth();
 export const storage = getStorage();
+
+export function docStore<T>(
+  path: string,
+) {
+  let unsubscribe: () => void;
+
+  const docRef = doc(db, path);
+
+  const { subscribe } = writable<T | null>(null, (set) => {
+    unsubscribe = onSnapshot(docRef, (snapshot) => {
+      set((snapshot.data() as T) ?? null);
+    });
+
+    return () => unsubscribe();
+  });
+
+  return {
+    subscribe,
+    ref: docRef,
+    id: docRef.id,
+  };
+}

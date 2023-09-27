@@ -8,6 +8,8 @@
 
   let tags: string[];
 
+  export let form;
+
   onMount(() => {
     tags = $page.url.searchParams.getAll('tag');
     console.log(tags);
@@ -18,6 +20,7 @@
 
 <div class="grid place-items-center max-w-2xl m-auto">
   <form method="POST" class="w-full p-5 mt-10" use:enhance>
+    {form?.test}
     <div class="flex flex-row input input-bordered w-full rounded-full focus-within:border-primary">
       <input 
         type="text"
