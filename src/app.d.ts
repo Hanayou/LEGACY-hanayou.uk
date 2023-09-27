@@ -6,6 +6,16 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface Platform {}
+
+		interface Project {
+			id: string;
+			title: string;
+			startDate: Date;
+			endDate: Date;
+			summary: string;
+			content: string;
+			published: boolean;
+		}
 	}
 }
 

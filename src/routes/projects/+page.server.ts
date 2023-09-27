@@ -1,42 +1,45 @@
 import type { PageServerLoad } from './$types';
 import { db } from "$lib/firebase";
-import { getDocs, collection, doc } from "firebase/firestore";
-import { QueryDocumentSnapshot, QuerySnapshot } from 'firebase-admin/firestore';
+import { getDocs, collection } from "firebase/firestore";
 
 export const load = (async ( url ) => {
-    return {};
+    let res = await getAllProjects();
+    return {
+        projects: res
+    };
 }) satisfies PageServerLoad;
 
-interface Project {
-    id: string;
-    title?: string;
-    summary?: string;
-    startDate?: Date;
-    endDate?: Date;
-    content?: string;
-    tags?: [];
-}
-
 // Returns all projects from the database
-async function getAllProjects(): Promise<string> {
+async function getAllProjects(): Promise<App.Project[]> {
+    const projects: App.Project[] = [];
     const querySnapshot = await getDocs(collection(db, "projects"));
-    
-    console.log(querySnapshot.docs[0].data().title)
-    return querySnapshot.docs[0].data().title;
+    querySnapshot.forEach((doc) => {
+        projects.push({
+            id: doc.id,
+            title: doc.data().title,
+            summary: doc.data().summary,
+            content: doc.data().content,
+            startDate: doc.data().startDate.toDate(),
+            endDate: doc.data().endDate.toDate(),
+            published: doc.data().published
+        });
+    });
+    return projects;
 }
-
 
 export const actions = {
     default: async ({ cookies, request }) => {
         // Extract Data
         const data = await request.formData();
+        const search = data.get('search') as string;
         console.log(data);
         
         try {
-            let test = await getAllProjects();
+            let res = await getAllProjects()
             return {
-                test: test
-            }
+                projects: res,
+                search: search
+            };
         } catch (e) {
             return "FAILED!";
         }

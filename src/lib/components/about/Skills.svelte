@@ -25,13 +25,13 @@
             <a href="/projects?tag=Svelte"><button class="btn rounded-full">Svelte</button></a>
             <a href="/projects?tag=HTML5"><button class="btn rounded-full">SvelteKit</button></a>
             <a href="/projects?tag=HTML5"><button class="btn rounded-full">TailwindCSS</button></a>
-            <a href="/projects?tag=HTML5"><button class="btn rounded-full">NodeJS</button></a>
             <a href="/projects?tag=Flutter"><button class="btn rounded-full">Flutter</button></a>
         </div>
         <div class="h-6"/>
         <strong>{langData.platformsTool}</strong>
         <div class="flex flex-row flex-wrap gap-2 justify-center">
             <a href="/projects?tag=GCP"><button class="btn rounded-full">Google Cloud Platform</button></a>
+            <a href="/projects?tag=HTML5"><button class="btn rounded-full">NodeJS</button></a>
             <a href="/projects?tag=GitHub"><button class="btn rounded-full">GitHub</button></a>
             <a href="/projects?tag=Unreal"><button class="btn rounded-full">Unreal Engine</button></a>
             <a href="/projects?tag=MSAzure"><button class="btn rounded-full">Microsoft Azure</button></a>
