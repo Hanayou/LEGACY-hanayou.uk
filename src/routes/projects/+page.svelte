@@ -2,6 +2,7 @@
   import { enhance } from '$app/forms';
   import { page } from '$app/stores';
   import Project from '$lib/components/projects/Project.svelte';
+  import { activeTags } from '$lib/stores/activeTagsStore.js';
 
   import Search from '$lib/icons/Search.svelte';
   import { onMount, setContext } from 'svelte';
@@ -23,11 +24,9 @@
   }); // Builds an array of tag.id (used in components for matching displayName)
   setContext('internalTagNames', internalTagNames);
 
-  let activeFilterTags: string[] = []; // Active list of tags
-  setContext('activeFilterTags', activeFilterTags); // set context to pass to Project
   // Add query params to activeFilterTags
   const url = $page.url;
-  if (url.searchParams.get('tag')) { activeFilterTags.push(url.searchParams.get('tag') as string); }
+  if (url.searchParams.get('tag')) { activeTags.toggleTag(url.searchParams.get('tag') as string); }
   
   let loading = false;
 

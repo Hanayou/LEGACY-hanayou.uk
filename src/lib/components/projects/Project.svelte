@@ -2,6 +2,7 @@
   import { db } from "$lib/firebase";
     import { getContext, onMount } from "svelte";
     import { fly } from "svelte/transition";
+    import { activeTags } from "$lib/stores/activeTagsStore";
 
     let activeFilterTags: string[] = getContext('activeFilterTags');
 
@@ -16,15 +17,7 @@
     // Tags
     const tags: App.Tags[] = getContext('tags');
     const internalTagNames: string[] = getContext('internalTagNames');
-    function toggleTag(tag: string): any {
-        if (activeFilterTags.includes(tag)) {
-            activeFilterTags = activeFilterTags.filter(function(e) { return e !== tag; });
-        } else {
-            activeFilterTags.push(tag);
-        }
-        activeFilterTags = activeFilterTags;
-        console.log(activeFilterTags);
-    }
+
 
     let modalId: string;
     onMount(() => {
@@ -54,9 +47,9 @@
         <div class="flex flew-row flex-wrap gap-2">
             {#each project.tags as tag}
                 <button
-                    on:click={toggleTag(`${tag}`)}
+                    on:click={activeTags.toggleTag(`${tag}`)}
                     class="bg-base-100 px-2 py-px rounded-full text-xs text-white"
-                    class:bg-primary={ activeFilterTags.includes(tag) }>
+                    class:bg-primary={ $activeTags.includes(tag) }>
                     {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
         </button>
             {/each}
@@ -71,9 +64,9 @@
                     <div class="flex flew-row flex-wrap gap-2">
                         {#each project.tags as tag}
                             <a href="/projects?tag={tag}"
-                                on:click={toggleTag(`${tag}`)}
+                                on:click={activeTags.toggleTag(`${tag}`)}
                                 class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary"
-                                class:bg-primary={ activeFilterTags.includes(tag) }>
+                                class:bg-primary={ $activeTags.includes(tag) }>
                                 {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
                             </a>
                         {/each}
