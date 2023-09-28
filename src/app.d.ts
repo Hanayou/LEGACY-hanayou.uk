@@ -15,6 +15,7 @@ declare global {
 			summary: string;
 			content: string;
 			published: boolean;
+			tags: string[];
 		}
 	}
 }

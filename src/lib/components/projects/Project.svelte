@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { db } from "$lib/firebase";
     import { onMount } from "svelte";
     import { fly } from "svelte/transition";
 
@@ -36,11 +37,13 @@
         </button>
         <div class="divider p-0 my-2"/>
         <div class="flex flew-row flex-wrap gap-2">
-            <a href="/projects?tag=C++" class="bg-base-100 px-2 py-px rounded-full text-xs text-white bg-primary">C++</a>
-            <a href="#" class="bg-base-100 px-2 py-px rounded-full text-xs">Java</a>
-            <a href="#" class="bg-base-100 px-2 py-px rounded-full text-xs">TypeScript</a>
-            <a href="#" class="bg-base-100 px-2 py-px rounded-full text-xs">SvelteKit</a>
-            <a href="#" class="bg-base-100 px-2 py-px rounded-full text-xs">Some other framework...</a>
+            {#each project.tags as tag}
+            <a href="/projects?tag={tag}"
+                class="bg-base-100 px-2 py-px rounded-full text-xs text-white"
+                class:bg-primary={ true }>
+                {tag}
+            </a>
+            {/each}
         </div>
     </div>
     <dialog id={modalId} class="modal">
@@ -50,13 +53,9 @@
                     <h3 class="font-bold text-xl">{project.title}</h3>
                     <p class="text-sm py-4">{startDateFormatted}-{endDateFormatted}</p>
                     <div class="flex flew-row flex-wrap gap-2">
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary">C++</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">Java</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">TypeScript</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">SvelteKit</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">Some other framework...</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">Some other framework...</a>
-                        <a href="#" class="bg-base-300 px-2 py-px rounded-full text-xs">Some other framework...</a>
+                        {#each project.tags as tag}
+                        <a href="/projects?tag={tag}" class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary">{tag}</a>
+                        {/each}
                     </div>
                 </div>
                 <form method="dialog">

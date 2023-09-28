@@ -6,11 +6,11 @@
   import Search from '$lib/icons/Search.svelte';
   import { onMount } from 'svelte';
 
+  // Tags
   let tags: string[];
-
-  export let form;
   let searchValue: string;
 
+  // Projects data returned in load / on form submission
   export let data;
   const projects: App.Project[] = data.projects;
 
@@ -18,7 +18,6 @@
 
   onMount(() => {
     tags = $page.url.searchParams.getAll('tag');
-    console.log(tags);
   });
 
 </script>

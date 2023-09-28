@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { db } from "$lib/firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, where, query, orderBy } from "firebase/firestore";
 
 export const load = (async ( url ) => {
     let res = await getAllProjects();
@@ -12,7 +12,10 @@ export const load = (async ( url ) => {
 // Returns all projects from the database
 async function getAllProjects(): Promise<App.Project[]> {
     const projects: App.Project[] = [];
-    const querySnapshot = await getDocs(collection(db, "projects"));
+    // Only return project where 'published' is set to true
+    const q = query(collection(db, "projects"),
+    where("published", "==", true), orderBy("endDate", "desc"));
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
         projects.push({
             id: doc.id,
@@ -21,7 +24,8 @@ async function getAllProjects(): Promise<App.Project[]> {
             content: doc.data().content,
             startDate: doc.data().startDate.toDate(),
             endDate: doc.data().endDate.toDate(),
-            published: doc.data().published
+            published: doc.data().published,
+            tags: doc.data().tags
         });
     });
     return projects;
