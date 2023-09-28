@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { db } from "$lib/firebase";
     import { getContext, onMount } from "svelte";
     import { fly } from "svelte/transition";
     import { activeTags } from "$lib/stores/activeTagsStore";
+    import ArticleViewer from "./ArticleViewer.svelte";
 
     let activeFilterTags: string[] = getContext('activeFilterTags');
 
@@ -80,9 +80,7 @@
             </div>
             <div class="divider"/>
             <div class="no-scrollbar overflow-y-scroll h-full scroll-shadows">
-                <p class="text-xl">
-                    {@html project.content}
-                </p>
+                <ArticleViewer content={project.content}/>
             </div>
         </div>
         <form method="dialog" class="modal-backdrop">

@@ -52,7 +52,6 @@ export const actions = {
         // Extract Data
         const data = await request.formData();
         const search = data.get('search') as string;
-        console.log(data);
         
         try {
             let res = await getAllProjects();

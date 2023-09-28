@@ -11,7 +11,6 @@ function activeTagsStore() {
             } else {
                 tags.push(tag); // Otherwise remove it
             }
-            console.log(tags);
             return tags;
         });
     }

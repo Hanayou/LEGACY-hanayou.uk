@@ -27,7 +27,6 @@
   // Add query params to activeFilterTags
   const url = $page.url;
   if (url.searchParams.get('tag')) { activeTags.toggleTag(url.searchParams.get('tag') as string); }
-  console.log(activeTags);
   
   // Boolean to show loading icon
   let loading = false;
@@ -80,7 +79,7 @@
         <button
           on:click={activeTags.toggleTag(`${tag}`)}
           class="px-2 py-px rounded-full text-xs text-white bg-primary">
-            {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+            {tag}
         </button>
       {/each}
     </div>
