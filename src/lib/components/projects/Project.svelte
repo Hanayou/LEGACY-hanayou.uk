@@ -1,7 +1,9 @@
 <script lang="ts">
   import { db } from "$lib/firebase";
-    import { onMount } from "svelte";
+    import { getContext, onMount } from "svelte";
     import { fly } from "svelte/transition";
+
+    let activeFilterTags: string[] = getContext('activeFilterTags');
 
     // Props
     export let index: number // from each loop
@@ -10,6 +12,19 @@
     // Format start and end dates
     const startDateFormatted = project.startDate.toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
     const endDateFormatted = project.endDate.toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
+
+    // Tags
+    const tags: App.Tags[] = getContext('tags');
+    const internalTagNames: string[] = getContext('internalTagNames');
+    function toggleTag(tag: string): any {
+        if (activeFilterTags.includes(tag)) {
+            activeFilterTags = activeFilterTags.filter(function(e) { return e !== tag; });
+        } else {
+            activeFilterTags.push(tag);
+        }
+        activeFilterTags = activeFilterTags;
+        console.log(activeFilterTags);
+    }
 
     let modalId: string;
     onMount(() => {
@@ -38,11 +53,12 @@
         <div class="divider p-0 my-2"/>
         <div class="flex flew-row flex-wrap gap-2">
             {#each project.tags as tag}
-            <a href="/projects?tag={tag}"
-                class="bg-base-100 px-2 py-px rounded-full text-xs text-white"
-                class:bg-primary={ true }>
-                {tag}
-            </a>
+                <button
+                    on:click={toggleTag(`${tag}`)}
+                    class="bg-base-100 px-2 py-px rounded-full text-xs text-white"
+                    class:bg-primary={ activeFilterTags.includes(tag) }>
+                    {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+        </button>
             {/each}
         </div>
     </div>
@@ -54,7 +70,12 @@
                     <p class="text-sm py-4">{startDateFormatted}-{endDateFormatted}</p>
                     <div class="flex flew-row flex-wrap gap-2">
                         {#each project.tags as tag}
-                        <a href="/projects?tag={tag}" class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary">{tag}</a>
+                            <a href="/projects?tag={tag}"
+                                on:click={toggleTag(`${tag}`)}
+                                class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary"
+                                class:bg-primary={ activeFilterTags.includes(tag) }>
+                                {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+                            </a>
                         {/each}
                     </div>
                 </div>
