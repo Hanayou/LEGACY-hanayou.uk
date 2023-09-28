@@ -3,9 +3,11 @@ import { db } from "$lib/firebase";
 import { getDocs, collection, where, query, orderBy } from "firebase/firestore";
 
 export const load = (async ( url ) => {
-    let res = await getAllProjects();
+    let projects = await getAllProjects();
+    let tags =  await getAllTags();
     return {
-        projects: res
+        projects: projects,
+        tags: tags
     };
 }) satisfies PageServerLoad;
 
@@ -30,6 +32,20 @@ async function getAllProjects(): Promise<App.Project[]> {
     });
     return projects;
 }
+
+async function getAllTags(): Promise<App.Tags[]> {
+    const tags: App.Tags[] = [];
+
+    const querySnapshot = await getDocs(collection(db, "projectTags"));
+    querySnapshot.forEach((doc) => {
+        tags.push({
+            id: doc.id,
+            displayName: doc.data().displayName,
+            category: doc.data().category
+        });
+    });
+    return tags;
+} 
 
 export const actions = {
     default: async ({ cookies, request }) => {

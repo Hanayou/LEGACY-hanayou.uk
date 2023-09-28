@@ -17,6 +17,12 @@ declare global {
 			published: boolean;
 			tags: string[];
 		}
+
+		interface Tags {
+			id: string;
+			displayName: string;
+			category: string;
+		}
 	}
 }
 

@@ -6,19 +6,32 @@
   import Search from '$lib/icons/Search.svelte';
   import { onMount } from 'svelte';
 
-  // Tags
-  let tags: string[];
-  let searchValue: string;
-
   // Projects data returned in load / on form submission
   export let data;
-  const projects: App.Project[] = data.projects;
+  let projects: App.Project[] = data.projects;
+  let filteredProjects = projects;
+
+  // Tags
+  let tags: App.Tags[] = data.tags;
+  console.log(tags);
+  let searchValue: string;
 
   let loading = false;
 
   onMount(() => {
-    tags = $page.url.searchParams.getAll('tag');
+    
   });
+
+  function research() {
+    loading = true; // Visual cue for search started
+    filteredProjects = projects;
+    filteredProjects = projects.filter((project) => {
+      // Filtering based on title
+      // Both search value and project title are converted to lower case as includes() is case-sensitive
+      return project.title.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    loading = false;
+  }
 
 </script>
 
@@ -36,6 +49,7 @@
         type="text"
         placeholder="Search..."
         bind:value={searchValue}
+        on:input={research}
         name="search"
         class="input input-ghost focus:outline-none bg-transparent w-full"/>
       <button class="btn bg-transparent hover:bg-transparent border-none hover:scale-110 duration-100">
@@ -43,13 +57,13 @@
       </button>
     </div>
   </form>
-  <div class="divider w-full px-5">{projects.length} Results</div>
+  <div class="divider w-full px-5">{filteredProjects.length} Results</div>
   <div class="flex flex-col w-full gap-3">
     {#if loading}
       <span class="loading loading-infinity loading-lg mx-auto"></span>
       <p class="text-center">Downloading Projects...</p>
     {:else }
-      {#each projects as project, index}
+      {#each filteredProjects as project, index}
         <Project {project} {index}/>
       {/each}
     {/if}
