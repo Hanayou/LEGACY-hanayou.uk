@@ -16,8 +16,8 @@
             <a href="/projects?tag=TypeScript"><button class="btn rounded-full">TypeScript</button></a>
             <a href="/projects?tag=PHP"><button class="btn rounded-full">PHP</button></a>
             <a href="/projects?tag=Dart"><button class="btn rounded-full">Dart</button></a>
-            <a href="/projects?tag=C++"><button class="btn rounded-full">C++</button></a>
-            <a href="/projects?tag=C#"><button class="btn rounded-full">C#</button></a>
+            <a href="/projects?tag=Cpp"><button class="btn rounded-full">C++</button></a>
+            <a href="/projects?tag=CSharp"><button class="btn rounded-full">C#</button></a>
         </div>
         <div class="h-6"/>
         <strong>{langData.frameworksLibraries}</strong>

@@ -12,7 +12,7 @@
   let projects: App.Project[] = data.projects;
   let filteredProjects = projects;
 
-  let searchValue: string;
+  let searchValue = "";
 
   // Tags
   let tags: App.Tags[] = data.tags; // Import all tags
@@ -27,12 +27,10 @@
   // Add query params to activeFilterTags
   const url = $page.url;
   if (url.searchParams.get('tag')) { activeTags.toggleTag(url.searchParams.get('tag') as string); }
+  console.log(activeTags);
   
+  // Boolean to show loading icon
   let loading = false;
-
-  onMount(() => {
-    
-  });
 
   function filterSearch() {
     loading = true; // Visual cue for search started
@@ -41,8 +39,15 @@
       // Both search value and project title are converted to lower case as includes() is case-sensitive
       return project.title.toLowerCase().includes(searchValue.toLowerCase());
     });
+
+    filteredProjects = filteredProjects.filter((project) => {
+      return $activeTags.every((v) => project.tags.includes(v));
+    });
+
     loading = false;
   }
+
+  $: $activeTags, filterSearch();
 
 </script>
 
@@ -71,7 +76,13 @@
   <div class="flex flex-row justify-between gap-3 w-full px-10">
     Filters: 
     <div class="flex flex-row flex-wrap gap-3 w-full">
-      <button>html</button>
+      {#each $activeTags as tag}
+        <button
+          on:click={activeTags.toggleTag(`${tag}`)}
+          class="px-2 py-px rounded-full text-xs text-white bg-primary">
+            {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+        </button>
+      {/each}
     </div>
   </div>
   <div class="divider w-full px-5">{filteredProjects.length} Results</div>

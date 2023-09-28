@@ -55,7 +55,7 @@ export const actions = {
         console.log(data);
         
         try {
-            let res = await getAllProjects()
+            let res = await getAllProjects();
             return {
                 projects: res,
                 search: search
