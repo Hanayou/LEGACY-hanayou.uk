@@ -86,7 +86,7 @@
     </div>
   </div>
   <div class="divider w-full px-5">{filteredProjects.length} Results</div>
-  <div class="flex flex-col w-full gap-3">
+  <div class="flex flex-col w-full gap-3 p-3">
     {#if loading}
       <span class="loading loading-infinity loading-lg mx-auto"></span>
       <p class="text-center">Downloading Projects...</p>

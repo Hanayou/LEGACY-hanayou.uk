@@ -48,8 +48,9 @@
             {#each project.tags as tag}
                 <button
                     on:click={activeTags.toggleTag(`${tag}`)}
-                    class="bg-base-100 px-2 py-px rounded-full text-xs text-white"
-                    class:bg-primary={ $activeTags.includes(tag) }>
+                    class="bg-base-100 px-2 py-px rounded-full text-xs"
+                    class:bg-primary={ $activeTags.includes(tag) }
+                    class:text-white={ $activeTags.includes(tag) }>
                     {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
         </button>
             {/each}
@@ -66,7 +67,8 @@
                             <a href="/projects?tag={tag}"
                                 on:click={activeTags.toggleTag(`${tag}`)}
                                 class="bg-base-300 px-2 py-px rounded-full text-xs text-white bg-primary"
-                                class:bg-primary={ $activeTags.includes(tag) }>
+                                class:bg-primary={ $activeTags.includes(tag) }
+                                class:text-white={ $activeTags.includes(tag) }>
                                 {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
                             </a>
                         {/each}
