@@ -1,6 +1,10 @@
-<script lang="ts">
-    import { language } from "$lib/stores/languageStore";
+<script lang="ts">  
     import { fade } from "svelte/transition";
+
+    // Langauge Props;
+    import { language } from "$lib/stores/languageStore";
+    import { lang } from '$lib/translations/root';
+    $: langData = $language === 'en' ? lang.en : lang.jp;
 
     const langToImg: {[lang: string]: string} = {
         en: 'uk',
@@ -8,9 +12,14 @@
     };
     $: img = langToImg[`${$language}`]; // reactively change bg image based on langauge setting
 
-    let words = ['App', 'Game', 'Web', 'Mobile'];
+    
+
+    // langData is null before page generation
+    // This ensures that the english default can be read until langData is available to switch to
+    $: words = langData.devTypes ?? ['App', 'Game', 'Web', 'Mobile'];
     let wordIndex = 0;
     let word = "App";
+    // Changese the word for devType every 4 seconds
     let wordTimer = setInterval(() => {
         if (wordIndex < words.length-1) { wordIndex++; } // Increment index by one
         else { wordIndex = 0; } // Reset at end of words array
@@ -27,21 +36,25 @@ style="background-image: url(images/{img}.jpg); transition: 0.25s;">
         <div class="max-w-lg w-screen">
             <div class="flex flex-row justify-center w-full">
                 <div class="typewriter w-full text-white">
-                    <h2 class="text-5xl font-bold typing-erase text-center pb-2">{word}</h2>
+                    <h2 class="text-5xl font-bold typing-erase text-center pb-2 textShadow">{word}</h2>
                 </div>
             </div>
-            <h2 class="w-full text-center text-white text-3xl">Development</h2>
-            <p class="my-10 text-white w-full">Welcome to my personal portfolio website.</p>
-            <a href="/about" class="btn btn-primary">About Me</a>
+            <h2 class="w-full text-center text-white text-3xl textShadow">{langData.development}</h2>
+            <p class="my-10 text-white w-full textShadow">{langData.introMsg}</p>
+            <a href="/about" class="btn btn-primary shadow-lg">{langData.button}</a>
         </div>
     </div>
 
     <footer class="absolute bottom-2 w-full">
-        <p class="text-center text-white opacity-60">This site was lovingly crafted using Svelte 4 and SvelteKit.</p>
+        <p class="text-center text-white opacity-60">{langData.footer}</p>
     </footer>
 </div>
 
 <style>
+    .textShadow {
+        text-shadow: 2px 2px 4px #000;
+    }
+
     .typewriter {
         max-width: auto;
         display: flex;
