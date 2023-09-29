@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Cenotaph";
+        src: url("../static/fonts/Cenotaph-Titling.otf");
+    }
+    html {
+        @apply duration-200;
+    }
+    body::-webkit-scrollbar {
+        display:none;
+    }
+
+    .activePage {
+        @apply shadow-inner bg-base-300;
+    }
+}
+
+@layer utilities {
+    @variants responsive {
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+            }
+        }
+    }
