@@ -12,9 +12,7 @@
         <h2>{title} <span class="text-sm font-light">({position})</span></h2>
         <p class="text-xs font-light text-primary">{location} ・ {date}</p>
     </div>
-    <div class="collapse-content"> 
-        <p>
-            {content}
-        </p>
+    <div class="collapse-content">
+        {@html content}
     </div>
 </div>

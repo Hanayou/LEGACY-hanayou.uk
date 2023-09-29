@@ -16,7 +16,7 @@
 
     .activePage {
         @apply shadow-inner bg-base-300;
-    }      
+    }
 }
 
 @layer utilities {

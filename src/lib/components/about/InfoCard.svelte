@@ -38,7 +38,7 @@
             </div>
             <div class="flex flex-col p-10 pt-0 gap-7 order-3 md:p-10">
                 <h1 class="text-4xl text-center md:text-left">{langData.greeting}</h1>
-                <p class="text-justify md:text-left">{langData.description}</p>
+                <p class="text-justify md:text-left">{@html langData.description}</p>
                 <div class="flex justify-center md:justify-start">
                     <a href="/projects"><button class="btn btn-primary text-white w-auto">{langData.button}</button></a>
                 </div>
