@@ -48,6 +48,11 @@
 
   $: $activeTags, filterSearch();
 
+      // Langauge Props;
+      import { language } from "$lib/stores/languageStore";
+    import { lang } from '$lib/translations/projects/projects';
+    $: langData = $language === 'en' ? lang.en : lang.jp;
+
 </script>
 
 <div class="grid place-items-center max-w-2xl m-auto">
@@ -62,7 +67,7 @@
     <div class="flex flex-row input input-bordered w-full rounded-full focus-within:border-primary">
       <input 
         type="text"
-        placeholder="Search..."
+        placeholder="{langData.search}..."
         bind:value={searchValue}
         on:input={filterSearch}
         name="search"
@@ -72,9 +77,9 @@
       </button>
     </div>
   </form>
-  <div class="flex flex-row justify-between gap-3 w-full px-10">
-    Filters: 
-    <div class="flex flex-row flex-wrap gap-3 w-full">
+  <div class="flex flex-row justify-start gap-3 w-full px-10">
+    <span class="flex-shrink-0">{langData.filters}: </span>
+    <div class="flex flex-row flex-wrap gap-3">
       {#each $activeTags as tag}
         <button
           on:click={activeTags.toggleTag(`${tag}`)}
@@ -84,7 +89,7 @@
       {/each}
     </div>
   </div>
-  <div class="divider w-full px-5">{filteredProjects.length} Results</div>
+  <div class="divider w-full px-5">{filteredProjects.length} {langData.results}</div>
   <div class="flex flex-col w-full gap-3 p-3">
     {#if loading}
       <span class="loading loading-infinity loading-lg mx-auto"></span>

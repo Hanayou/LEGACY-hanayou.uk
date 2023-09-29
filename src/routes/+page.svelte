@@ -25,6 +25,8 @@
         else { wordIndex = 0; } // Reset at end of words array
         word = words[wordIndex];
     }, 4000);
+    // Ensures dynamic devType text is updated immediately on langauge change
+    $: word = langData.devTypes[wordIndex] ?? words[wordIndex];
 </script>
 
 <div 
