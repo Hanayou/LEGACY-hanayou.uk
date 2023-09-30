@@ -2,39 +2,25 @@
   import { enhance } from '$app/forms';
   import { page } from '$app/stores';
   import Project from '$lib/components/projects/Project.svelte';
+  import Search from '$lib/icons/Search.svelte';
+
+  import { projects } from '$lib/stores/projects/projectsStore'
+  import { tags } from '$lib/stores/projects/projectTagsStore';
   import { activeTags } from '$lib/stores/activeTagsStore.js';
 
-  import Search from '$lib/icons/Search.svelte';
-  import { onMount, setContext } from 'svelte';
-
-  // Projects data returned in load / on form submission
-  export let data;
-  let projects: App.Project[] = data.projects;
-  let filteredProjects = projects;
-
+  let filteredProjects: App.Project[] = [];
+  let loading = false; // Boolean to show loading icon
   let searchValue = "";
-
-  // Tags
-  let tags: App.Tags[] = data.tags; // Import all tags
-  setContext('tags', tags); // Share tags with children
-  
-  const internalTagNames: string [] = [];
-  tags.forEach((tag) => {
-    internalTagNames.push(tag.id)
-  }); // Builds an array of tag.id (used in components for matching displayName)
-  setContext('internalTagNames', internalTagNames);
+  activeTags.resetTags(); // Reset on page load
 
   // Add query params to activeFilterTags
   const url = $page.url;
   if (url.searchParams.get('tag')) { activeTags.toggleTag(url.searchParams.get('tag') as string); }
   
-  // Boolean to show loading icon
-  let loading = false;
-
   function filterSearch() {
     loading = true; // Visual cue for search started
-    filteredProjects = projects;
-    filteredProjects = projects.filter((project) => {
+    filteredProjects = $projects;
+    filteredProjects = $projects.filter((project) => {
       // Both search value and project title are converted to lower case as includes() is case-sensitive
       return project.title.toLowerCase().includes(searchValue.toLowerCase());
     });
@@ -48,10 +34,24 @@
 
   $: $activeTags, filterSearch();
 
-      // Langauge Props;
-      import { language } from "$lib/stores/languageStore";
-    import { lang } from '$lib/translations/projects/projects';
-    $: langData = $language === 'en' ? lang.en : lang.jp;
+  // Langauge Props;
+  import { language } from "$lib/stores/languageStore";
+  import { lang } from '$lib/translations/projects/projects';
+  import { onMount } from 'svelte';
+  $: langData = $language === 'en' ? lang.en : lang.jp;
+
+  // Called in the await block for Project Components below
+  // Required to ensure filteredProjects is set after projects get loaded
+  async function preLoad(): Promise<void> {
+    await projects.getProjects().then(() => {
+      filteredProjects = $projects;
+      filterSearch();
+    });
+  }
+
+  onMount(() => {
+    tags.getTags(); // Tags store initialisation
+  })
 
 </script>
 
@@ -91,13 +91,15 @@
   </div>
   <div class="divider w-full px-5">{filteredProjects.length} {langData.results}</div>
   <div class="flex flex-col w-full gap-3 p-3">
-    {#if loading}
+    {#await preLoad()}
       <span class="loading loading-infinity loading-lg mx-auto"></span>
       <p class="text-center">Downloading Projects...</p>
-    {:else }
+    {:then}
       {#each filteredProjects as project, index}
         <Project {project} {index}/>
       {/each}
-    {/if}
+    {:catch error}
+      <p class="text-center text-xl">An error has occured: {error}</p>
+    {/await}
   </div>
 </div>

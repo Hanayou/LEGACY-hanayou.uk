@@ -1,23 +1,18 @@
 <script lang="ts">
-    import { getContext, onMount } from "svelte";
+    import { onMount } from "svelte";
     import { fly } from "svelte/transition";
     import { activeTags } from "$lib/stores/activeTagsStore";
     import ArticleViewer from "./ArticleViewer.svelte";
 
-    let activeFilterTags: string[] = getContext('activeFilterTags');
+    import { tags } from "$lib/stores/projects/projectTagsStore";
 
     // Props
     export let index: number // from each loop
     export let project: App.Project;
 
     // Format start and end dates
-    const startDateFormatted = project.startDate.toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
-    const endDateFormatted = project.endDate.toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
-
-    // Tags
-    const tags: App.Tags[] = getContext('tags');
-    const internalTagNames: string[] = getContext('internalTagNames');
-
+    const startDateFormatted = new Date(project.startDate).toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
+    const endDateFormatted = new Date(project.endDate).toLocaleDateString('en-uk', {  year: "numeric", month: "short"});
 
     let modalId: string;
     onMount(() => {
@@ -51,7 +46,7 @@
                     class="bg-base-100 px-2 py-px rounded-full text-xs"
                     class:bg-primary={ $activeTags.includes(tag) }
                     class:text-white={ $activeTags.includes(tag) }>
-                    {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+                    {tag}
         </button>
             {/each}
         </div>
@@ -69,7 +64,7 @@
                                 class="bg-base-300 px-2 py-px rounded-full text-xs text-white"
                                 class:bg-primary={ $activeTags.includes(tag) }
                                 class:text-white={ $activeTags.includes(tag) }>
-                                {tags[internalTagNames.findIndex(v => v.includes(tag))].displayName}
+                                {tag}
                             </a>
                         {/each}
                     </div>
