@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
+  safelist: [
+    'alert-warning' // TEMPORARY work around for displaying warnings until full CMS solution implemented
+  ],
   theme: {
     extend: {
       fontFamily: {
