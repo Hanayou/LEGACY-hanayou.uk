@@ -11,9 +11,9 @@
     });
 </script>
 
-<div>
+<div class="flex flex-col min-h-screen">
     <NavBar />
-    <div class="pt-[64px]">
+    <div class="flex-1">
         <slot />
     </div>
 </div>

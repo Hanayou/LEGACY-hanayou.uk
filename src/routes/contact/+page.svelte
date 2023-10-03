@@ -19,7 +19,7 @@
 
 <div
     in:fly={{ delay: 0, duration: 500, y: 200}}
-    class="grid place-items-center w-screen px-5">
+    class="grid place-items-center px-5">
     <div class="mockup-window shadow-xl bg-base-300 m-10 w-full max-w-4xl">
         <div
             in:fade={{ delay:250, duration: 500}}
